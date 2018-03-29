@@ -10,8 +10,12 @@ import contactTpl from './templates/contact.hbs'
 
 import playersJson from './templates/players.json';
 
-//helper
-
+//age helper
+Handlebars.registerHelper('age', function age(birthdate) {
+    let birthday = new Date(birthdate);
+    let today = new Date();
+    return today.getFullYear() - birthday.getFullYear();
+});
 
 const $app = $('#app');
 
