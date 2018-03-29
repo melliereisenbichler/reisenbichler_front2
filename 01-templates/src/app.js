@@ -27,22 +27,13 @@ function players() {
     $app.html(playersTpl({player: playersJson.players}))
 }
 
-function player() {
-    let curPlayer = ""
+function player(context) {
+    const path = context.params.player;
+    const player = playersJson.players.find(function(elmt) {
+        if(elmt.path === path) return elmt
+    })
 
-    //extract path for player
-    let urlpath = location.href.substr(location.href.lastIndexOf('/') + 1);
-   
-        for(let i = 0; i < playersJson.players.length; i++){
-            if(urlpath == playersJson.players[i].path){
-                curPlayer = playersJson.players[i]
-            }
-        } 
-
-        $app.html(playerTpl({player: curPlayer})) 
-    /*else {
-        router.redirect('*')
-    }*/
+    $app.html(playerTpl({player: player})) 
 }
 
 function notfound() {
