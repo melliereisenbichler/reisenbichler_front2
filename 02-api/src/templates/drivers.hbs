@@ -1,0 +1,22 @@
+<h1>All drivers listed below</h1>
+
+<!--{{#each driver}}
+    <li>
+     <a href="/drivers/{{path}}">{{name}}</a>
+     {{givenName}}
+    </li>
+{{/each}}-->
+
+<table>
+    <thead>
+        <th>Name</th>
+    </thead>
+    <tbody>
+        {{#each drivers}}
+        <tr>
+            <td><a href="/drivers/{{driverId}}">{{givenName}} {{familyName}}</a></td>
+        </tr>
+        {{/each}}
+        <!-- .... -->
+    </tbody> 
+</table>
