@@ -1,0 +1,20 @@
+{
+    players: [
+      {
+        name: 'Magnus Carlsen',
+        'path': 'MagnusCarlsen',
+        'birthdate': '1990-10-30',
+        'bio': 'is a Norwegian chess grandmaster and the current World Chess Champion. ...',
+        'wiki': 'https://en.wikipedia.org/wiki/Magnus_Carlsen',
+        'pic': 'https://upload.wikimedia.org/wikipedia/commons/c/c0/15-10-10-Magnus_Carlsen-RalfR-N3S_2364.jpg'
+      },
+      {
+        'name': 'Sergey Karjakin',
+        'path': 'SergeyKarjakin',
+        'birthdate': '1990-10-01',
+        'bio': 'is a Russian (formerly representing Ukraine) chess grandmaster. ...',
+        'wiki': 'https://en.wikipedia.org/wiki/Sergey_Karjakin',
+        'pic': 'https://upload.wikimedia.org/wikipedia/commons/2/22/Sergey_Karjakin_%282017-07-06%29_02.jpg'
+      }
+    ]
+}
