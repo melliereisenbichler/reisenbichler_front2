@@ -1,2 +1,41 @@
-<h1>{{driver.givenName}} {{driver.familyName}}</h1>
+<h1>{{driver.givenName}} {{familyName}}</h1>
+<p>Birthday: {{dateOfBirth}}</p>
+<p>Nationality: {{nationality}}</p>
+<p>Constructors:
+{{#each constructors}}
+   <a href="{{url}}">{{constructorId}} </a>
+{{/each}}
+</p>
+<br>
+<!--<p>Results:
+   <table>
+    <thead>
+        <th>Race Name</th>
+        <th>Season</th>
+        <th>Round</th>
+        <th>Read More</th>
+    </thead>
+    <tbody>
+        {{#each result}}
+        <tr>
+            <td>{{raceName}}</td>
+            <td>{{season}}</td>
+            <td>{{round}}</td>
 
+
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</p>
+<br>
+<p>Find out more about {{familyName}} on <a href="{{url}}">Wikipedia </a></p>
+-->
+
+<style>
+td, th{
+    padding-right: 0.8em;
+    padding-bottom: 0.3em;
+}
+
+</style>
