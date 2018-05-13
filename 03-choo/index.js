@@ -13,30 +13,56 @@ const styles = css`
 `;
 
 const wagon = 'railway_car';
+const loc = 'steam_locomotive';
 
 // steam_locomotive
 app.model({
   state: {
+    locs: [loc, loc, loc, loc],
     wagons: [],
-    gleis: []
+    trackA: [],
+    trackB: []
   },
   reducers: {
-    addWagon: (data, state) => ({ wagons: [...state.wagons, wagon] }),
-    moveWagon: (data, state) => {
+    addWagon: (data, state) => {
+      if(state.wagons.length < 11){
+        state.wagons.push(wagon);
+      }
+    },
+    moveWagonToA: (data, state) => {
       const add = [];
 
-      if (state.wagons.length > 1) {
+      if (state.wagons.length >= 1 && state.trackA.length < 5) {
         state.wagons.pop();
         add.push(wagon);
       }
 
-      if (state.gleis.length === 0) {
-        add.push('steam_locomotive');
+      if (state.trackA.length === 0) {
+        add.unshift(loc);
+        state.locs.pop();
       }
 
       return Object.assign(state, {
         wagons: state.wagons,
-        gleis: [...state.gleis, ...add]
+        trackA: [...state.trackA, ...add]
+      });
+    },
+    moveWagonToB: (data, state) => {
+      const add = [];
+
+      if (state.wagons.length >= 1 && state.trackB.length < 6) {
+        state.wagons.pop();
+        add.push(wagon);
+      }
+
+      if (state.trackB.length === 0) {
+        add.unshift(loc);
+        state.locs.pop();
+      }
+
+      return Object.assign(state, {
+        wagons: state.wagons,
+        trackB: [...state.trackB, ...add]
       });
     }
   }
@@ -47,14 +73,22 @@ const mainView = (state, prev, send) => html`
     <h1>Rangierbahnhof</h1>
     <hr>
     <button onclick=${() =>
-      send('addWagon')} class="btn btn-primary">Wagen hinzufügen</button>
+      send('addWagon')} class="btn btn-primary">Add Wagon</button>
     <button onclick=${() =>
-      send('moveWagon')} class="btn btn-danger">Rangieren</button>
+      send('moveWagonToA')} class="btn btn-danger">Add to track A</button>
+    <button onclick=${() =>
+      send('moveWagonToB')} class="btn btn-danger">Add to track B</button>
     <div class="gleis">
-      ${state.wagons.map((v) => emoji.get(v))}
+      Locs: ${state.locs.map((v) => emoji.get(v))}
     </div>
     <div class="gleis">
-      ${state.gleis.map((v) => emoji.get(v))}
+      Wagons: ${state.wagons.map((v) => emoji.get(v))}
+    </div>
+    <div class="gleis">
+      Track A: ${state.trackA.map((v) => emoji.get(v))}
+    </div>
+    <div class="gleis">
+      Track B: ${state.trackB.map((v) => emoji.get(v))}
     </div>
   </main>
 `;
