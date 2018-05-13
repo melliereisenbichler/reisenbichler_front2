@@ -19,9 +19,10 @@ const loc = 'steam_locomotive';
 app.model({
   state: {
     locs: [loc, loc, loc, loc],
-    wagons: [],
+    wagons: [wagon, wagon, wagon, wagon, wagon, wagon, wagon, wagon, wagon, wagon],
     trackA: [],
-    trackB: []
+    trackB: [],
+    selected: false
   },
   reducers: {
     addWagon: (data, state) => {
@@ -64,7 +65,28 @@ app.model({
         wagons: state.wagons,
         trackB: [...state.trackB, ...add]
       });
-    }
+    },
+    dispatchTrain: (data, state) => {
+      if(data.track == "A"){
+        if(state.trackA.length == 5){
+          console.log("train A dispatched.")
+          return {
+            trackA: []
+          }
+        }
+      }else if(data.track == "B"){
+        if(state.trackB.length == 6){
+          console.log("train B dispatched.")
+          return {
+            trackB: []
+          }
+        }
+      }
+
+    },
+    changeSelectedTrack: (data, state) => {
+        return {selected: data.track}
+     }
   }
 });
 
@@ -89,6 +111,19 @@ const mainView = (state, prev, send) => html`
     </div>
     <div class="gleis">
       Track B: ${state.trackB.map((v) => emoji.get(v))}
+    </div>
+    <div class="gleis">
+    Select a track to schedule:
+    <select id="selectTrack" onchange=${() => {
+          var selTrack = document.getElementById("selectTrack").value;
+          send('changeSelectedTrack', {track: selTrack})}
+    } >
+      <option value="A">Track A</option>
+      <option value="B">Track B</option>
+    </select>
+
+    <button onclick=${() =>
+      send('dispatchTrain', { track: state.selected })} class="btn btn-success">Schedule Train</button>
     </div>
   </main>
 `;
