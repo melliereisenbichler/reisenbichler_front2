@@ -26,41 +26,46 @@ app.model({
   },
   reducers: {
     addWagon: (data, state) => {
-      if(state.wagons.length < 11){
+      if(state.wagons.length < 10){
         state.wagons.push(wagon);
       }
     },
     moveWagonToA: (data, state) => {
       const add = [];
 
-      if (state.wagons.length >= 1 && state.trackA.length < 5) {
-        state.wagons.pop();
-        add.push(wagon);
+      if(state.wagons.length >= 1){
+        if (state.trackA.length === 0  && state.locs.length > 0) {
+          add.unshift(loc);
+          state.locs.pop();
+          add.push(wagon);
+          state.wagons.pop();
+        }
+        if (state.trackA.length < 5 && state.trackA.length > 0) {// state.trackA.length > 0 --> don't add wagons to track without a lok
+          state.wagons.pop();
+          add.push(wagon);
+        }
       }
-
-      if (state.trackA.length === 0) {
-        add.unshift(loc);
-        state.locs.pop();
-      }
-
       return Object.assign(state, {
         wagons: state.wagons,
         trackA: [...state.trackA, ...add]
       });
+
     },
     moveWagonToB: (data, state) => {
       const add = [];
 
-      if (state.wagons.length >= 1 && state.trackB.length < 6) {
-        state.wagons.pop();
-        add.push(wagon);
+      if(state.wagons.length >= 1){
+        if (state.trackB.length === 0  && state.locs.length > 0) {
+          add.unshift(loc);
+          state.locs.pop();
+          add.push(wagon);
+          state.wagons.pop();
+        }
+        if (state.trackB.length < 6 && state.trackB.length > 0) {// state.trackA.length > 0 --> don't add wagons to track without a lok
+          state.wagons.pop();
+          add.push(wagon);
+        }
       }
-
-      if (state.trackB.length === 0) {
-        add.unshift(loc);
-        state.locs.pop();
-      }
-
       return Object.assign(state, {
         wagons: state.wagons,
         trackB: [...state.trackB, ...add]
@@ -118,8 +123,9 @@ const mainView = (state, prev, send) => html`
           var selTrack = document.getElementById("selectTrack").value;
           send('changeSelectedTrack', {track: selTrack})}
     } >
-      <option value="A">Track A</option>
-      <option value="B">Track B</option>
+      ${["A", "B"].map(track => {
+        return html`<option value="${track}" ${state.selected === track ? "selected" : ""}>${track}</option>`;
+      })}
     </select>
 
     <button onclick=${() =>
