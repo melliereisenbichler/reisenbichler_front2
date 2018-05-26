@@ -1,0 +1,26 @@
+<h3>Style</h3>
+
+<h4>Text with Style</h4>
+<div class="row">
+  <div class="col-sm-12">
+    <svg class="svg-style" viewBox="0 0 500 100">
+     <text x="0" y="15" fill="red">I</text>
+     <text x="10" y="60" fill="red" style="font-size:50px">love</text>
+     <text x="100" y="80" fill="red">SVG!</text>
+    </svg>
+  </div>
+</div>
+
+<h4>Patterns</h4>
+<div class="row">
+  <div class="col-sm-12">
+    <svg class="svg-style" viewBox="0 0 500 300">
+      <pattern id="circles-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="10" cy="10" r="10" style="fill:rgb(159, 59, 159)"/>
+      </pattern>
+
+      <circle cx="100" cy="100" r="100" fill="url(#circles-pattern)" />
+
+    </svg>
+  </div>
+</div>
