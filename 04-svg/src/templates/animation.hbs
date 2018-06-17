@@ -1,8 +1,20 @@
 <h3>Animation</h3>
+<p>Click the circle!!</p>
 <div class="row">
   <div class="col-sm-12">
     <svg class="svg-animation" viewBox="0 0 900 450">
+      <circle id="anim_circle" r="150" cx="150" cy="200" style="fill:rgb(122,114,169)" />
+
+      <animate
+          xlink:href="#anim_circle"
+          attributeName="cx"
+          from="150"
+          to="700"
+          dur="2s"
+          begin="click"
+          fill="freeze" />
 
     </svg>
+
   </div>
 </div>
